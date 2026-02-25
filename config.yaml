@@ -1,0 +1,36 @@
+# Global config, e.g. references
+threads: 8 
+data_dir: "data" 
+output_dir: "results"
+reference_fasta: "ref/hg38.fa"
+reference_gtf: "ref/gencode.v47.annotation.gtf"
+fwd_primer: "ref/fwd_primers.fasta"
+rev_primer: "ref/rev_primers.fasta"
+clinvar_variants: "ref/clinvar_variants.tsv"
+MANE_transcripts: "ref/MANE_select_transcripts.tsv"
+
+# Case configuration e.g. ROI, case vs control
+cases:
+  - name: example_HBB_case_1
+  case_sample: sample_1
+  case_control: control_1
+  chrom: "chr11"
+  start_pos: 5225464                      #Start position of the gene -100bp to increase visualisation window
+  end_pos: 5227071                        #End position of the gene +100bp to increase visualisation window
+  gene: "HBB"
+  variant_name: ["rs334", "example_variant"] #Example format ["c.1234A>G", "c.111+222A>G"]
+  variant_pos: [5227002, 5226547]         #Genomic position of variant for visualising on the output figures, cannot be a range
+  prop_threshold: 0.05                    #This allows for manual resetting of the proportion threshold for complex transcript profiles e.g. 0.001
+  mane_id: "ENST00000335295.4"            #Or the most highly expressed transcript ID for the tissue utilised, for comparison
+
+  - name: example_HBB_case_2
+  case_sample: sample_2
+  case_control: control_2
+  chrom: "chr11"
+  start_pos: 5225464
+  end_pos: 5227071
+  gene: "HBB"
+  variant_name: ["rs334", "example_variant"]
+  variant_pos: [5227002, 5226547]
+  prop_threshold: 0.05
+  mane_id: "ENST00000335295.4"

@@ -1,0 +1,16 @@
+name: rapid_env       
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.9
+  - nanostat
+  - cutadapt
+  - samtools
+  - minimap2
+  - stringtie
+  - snakemake
+  - r-base
+  - r-optparse
+  - r-tidyverse

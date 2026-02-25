@@ -1,0 +1,59 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+
+# R
+.Rhistory
+.RData
+
+# Conda environments
+.env/
+.conda/
+*.yml.lock
+
+# Snakemake
+.snakemake/
+
+# Logs
+logs/
+*.log
+
+# Results and output
+results/
+output/
+
+# Input sequencing data
+data/
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+
+# Alignment files
+*.bam
+*.bai
+*.sam
+
+# Variant files
+*.vcf
+*.vcf.gz
+*.tbi
+
+# Reference genomes
+*.fa
+*.fasta
+*.fai
+*.gtf
+*.gtf.gz
+
+# Large nanopore files
+*.pod5
+*.fast5
+
+# Temporary files
+tmp/
+temp/
