@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # RAPID: RNA Analysis Pipeline for Integrated Diagnostics
 
 RAPID is a fully automated Snakemake workflow for the analysis of
