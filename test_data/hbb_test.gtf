@@ -1,0 +1,12 @@
+chr11	HAVANA	gene	5465	7072	.	-	.	gene_id "ENSG00000244734.4"; gene_type "protein_coding"; gene_name "HBB";
+chr11	HAVANA	transcript	5465	7072	.	-	.	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_type "protein_coding"; gene_name "HBB"; transcript_type "protein_coding"; transcript_name "HBB-201"; tag "MANE_Select"; tag "Ensembl_canonical";
+chr11	HAVANA	exon	6931	7072	.	-	.	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 1; exon_id "ENSE00001829867.2";
+chr11	HAVANA	CDS	6931	7022	.	-	0	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 1;
+chr11	HAVANA	start_codon	7020	7022	.	-	0	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 1;
+chr11	HAVANA	UTR	7023	7072	.	-	.	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 1;
+chr11	HAVANA	exon	6578	6800	.	-	.	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 2; exon_id "ENSE00001057381.1";
+chr11	HAVANA	CDS	6578	6800	.	-	1	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 2;
+chr11	HAVANA	exon	5465	5727	.	-	.	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 3; exon_id "ENSE00001600613.2";
+chr11	HAVANA	CDS	5602	5727	.	-	0	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 3;
+chr11	HAVANA	stop_codon	5599	5601	.	-	0	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 3;
+chr11	HAVANA	UTR	5465	5601	.	-	.	gene_id "ENSG00000244734.4"; transcript_id "ENST00000335295.4"; gene_name "HBB"; exon_number 3;

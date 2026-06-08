@@ -1,4 +1,6 @@
-name: rapid_env
+=======
+name: RAPID_env
+>>>>>>> a59c53f (Update README, report script, environment; add self-contained HBB test dataset)
 channels:
   - conda-forge
   - bioconda
@@ -11,6 +13,18 @@ dependencies:
   - minimap2=2.28
   - stringtie=2.2.3
   - nanostat=1.6.0
+<<<<<<< HEAD
+=======
+  - bcftools=1.21
+  # R and report-step packages
+>>>>>>> a59c53f (Update README, report script, environment; add self-contained HBB test dataset)
   - r-base
   - r-optparse
   - r-tidyverse
+  - r-cowplot
+  - r-base64enc
+  - r-remotes
+  - bioconductor-rtracklayer
+  # NOTE: ggtranscript is GitHub-only and cannot be installed via conda.
+  # After creating this environment, install it with:
+  #   Rscript -e 'remotes::install_github("dzhang32/ggtranscript")'

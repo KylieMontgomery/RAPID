@@ -6,7 +6,6 @@ suppressPackageStartupMessages({
   library(ggtranscript)
   library(cowplot)
   library(rtracklayer)
-  library(ggtext)
   library(base64enc)
 })
 
@@ -71,11 +70,18 @@ df <- as.data.frame(gtf_data) %>%
 if (!is.na(target_gene_id)) {
   gene_group_ids <- target_gene_id
 } else { 
+  gene_cols <- intersect(c("ref_gene_name", "gene_name"), names(df))
+  gene_match <- if (length(gene_cols) == 0) {
+    rep(FALSE, nrow(df))
+  } else {
+    Reduce(`|`, lapply(gene_cols, function(col) !is.na(df[[col]]) & df[[col]] == opt$gene))
+  }
   gene_group_ids <- df %>%
+    mutate(.gene_match = gene_match) %>%
     filter(seqnames == opt$chrom,
            between(start, opt$start_pos, opt$end_pos),
-           type %in% c("transcript","exon")) %>%
-    filter(ref_gene_name == opt$gene | gene_name == opt$gene) %>%
+           type %in% c("transcript","exon"),
+           .gene_match) %>%
     distinct(gene_id) %>% pull()
   if (length(gene_group_ids) == 0) {
     gene_group_ids <- df %>%
@@ -166,11 +172,10 @@ filtered_data_threshold <- filtered_data_threshold %>%
                                 else unique(transcript_id)))
 
 custom_labels <- levels(filtered_data_threshold$transcript_id)
-if (!is.null(mane_id) && mane_id %in% custom_labels) {
-  custom_labels <- ifelse(custom_labels == mane_id,
-                          paste0("<span style='color:#006400;'><b>", custom_labels, "</b></span>"),
-                          custom_labels)
-} 
+names(custom_labels) <- custom_labels   # plain, no <span>
+
+prop_cols <- ifelse(levels(filtered_data_threshold$transcript_id) == mane_id, "#006400", "black")
+prop_face <- ifelse(levels(filtered_data_threshold$transcript_id) == mane_id, "bold", "plain")
 names(custom_labels) <- levels(filtered_data_threshold$transcript_id)
 
 # keep a transcript if it reaches the threshold in ANY sample
@@ -212,7 +217,7 @@ proportion_plot <- ggplot(plot_data, aes(x = transcript_id, y = prop_cov, fill =
   labs(title = "Transcript Proportions", x = NULL, y = "Proportion of Coverage") +
   coord_flip() +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(size = 12),
+  theme(axis.text.y = element_text(colour = prop_cols, face = prop_face, size = 12),
         legend.position = "bottom", legend.title = element_blank())
 ggsave(proportion_plot_file, plot = proportion_plot, width = 7, height = 4, dpi = 300)
 
@@ -315,13 +320,12 @@ if (nrow(exons) > 0) {
   include_variant_row <- nrow(variant_labels) > 0
   levels_top_with_variants <- if (include_variant_row) c("Case Variants", levels_top) else levels_top
   levels_for_scale <- rev(levels_top_with_variants)
-  lbls <- setNames(levels_top_with_variants, levels_top_with_variants)
-  if (!is.null(mane_id) && mane_id %in% lbls) {
-    lbls[mane_id] <- sprintf("<span style='color:#006400'><b>%s</b></span>", mane_id)
-  }
-  if (include_variant_row) {
-    lbls["Case Variants"] <- "<span style='color:red;'>Case Variants</span>"
-  }
+  lbls <- setNames(levels_top_with_variants, levels_top_with_variants)  # plain text, no HTML
+  
+  # Per-label styling in the order the axis draws them (levels_for_scale)
+  axis_cols <- ifelse(levels_for_scale == mane_id, "#006400",
+                      ifelse(levels_for_scale == "Case Variants", "red", "black"))
+  axis_face <- ifelse(levels_for_scale == mane_id, "bold", "plain")
   
   p_transcripts <- ggplot(exons, aes(y = factor(transcript_id, levels = levels_top_with_variants))) +
     geom_range(aes(xstart = start, xend = end), color = "black", alpha = 0.7) +
@@ -336,7 +340,8 @@ if (nrow(exons) > 0) {
     theme_bw() +
     theme(plot.margin = margin(20, 50, 20, 30),
           axis.title.y = element_blank(),
-          axis.text.y  = ggtext::element_markdown(size = 9, margin = margin(l = 6)),
+          axis.text.y       = element_text(colour = axis_cols, face = axis_face, size = 9, margin = margin(l = 6)),
+          axis.text.y.right = element_text(colour = axis_cols, face = axis_face, size = 9, margin = margin(l = 6)),
           legend.title = element_blank(),
           legend.position = "bottom") +
     labs(x = "Genomic coordinate", title = "Structural differences compared to MANE Select")
