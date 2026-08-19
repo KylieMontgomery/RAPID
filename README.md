@@ -1,5 +1,7 @@
 # RAPID: RNA Analysis Pipeline for Integrated Diagnostics
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22015425.svg)](https://doi.org/10.5281/zenodo.22015425)
+
 RAPID is a fully automated Snakemake workflow for the analysis of
 targeted long-read RNA sequencing data generated using Oxford Nanopore
 Technologies platforms. The pipeline performs quality control, primer
